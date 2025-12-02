@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EnviosExpress | Logística del Futuro</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <style>
+    /* VARIABLES DE COLOR */
+    :root {
+      --primary: #6366f1;
+      --secondary: #ec4899;
+      --dark-bg: #0f172a;       
+      --card-bg: #1e293b;       
+      --text-gray: #cbd5e1;     
+      --font-main: 'Outfit', sans-serif;
+    }
+
+    /* FORZAR MODO OSCURO (ESTO ARREGLA TU PROBLEMA DE FONDO BLANCO) */
+    body {
+      background-color: var(--dark-bg) !important;
+      color: #ffffff !important;
+      font-family: var(--font-main) !important;
+      overflow-x: hidden;
+    }
+
+    /* ORBES DE FONDO (LAS LUCES DE NEÓN) */
+    .orb-wrapper {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        overflow: hidden; z-index: -1; pointer-events: none;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.4;
+    }
+    .orb-1 {
+      width: 400px; height: 400px; background: #4f46e5;
+      top: -100px; left: -100px;
+    }
+    .orb-2 {
+      width: 300px; height: 300px; background: #06b6d4;
+      bottom: 0; right: -50px;
+    }
+
+    /* TEXTOS Y UTILIDADES */
+    .text-gradient {
+      background: linear-gradient(135deg, #22d3ee 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+    .text-light-gray { color: var(--text-gray) !important; }
+    .section-padding { padding: 80px 0; }
+    
+    /* NAVBAR PREMIUM */
+    .navbar {
+      background: rgba(15, 23, 42, 0.85) !important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 15px 0;
+    }
+    .nav-link { color: #fff !important; font-weight: 500; margin: 0 10px; }
+    .nav-link:hover { color: #22d3ee !important; }
+
+    /* TARJETAS (SOLUCIÓN AL FONDO BLANCO) */
+    .card {
+      background-color: var(--card-bg) !important; /* IMPORTANTE */
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 24px !important;
+      color: white !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    /* BOTONES */
+    .btn-primary-gradient {
+      background: linear-gradient(90deg, #6366f1, #818cf8);
+      border: none; color: white; border-radius: 50px;
+      padding: 12px 35px; font-weight: 700; letter-spacing: 0.5px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-primary-gradient:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
+      color: white;
+    }
+
+    .btn-outline-glow {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.2);
+      color: white; border-radius: 50px;
+      padding: 10px 30px; font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-outline-glow:hover {
+        background: white; color: var(--dark-bg); border-color: white;
+        box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+
+    /* SERVICIOS */
+    .service-card {
+        transition: all 0.3s ease; cursor: pointer;
+    }
+    .service-card:hover {
+        transform: translateY(-10px);
+        border-color: #6366f1 !important;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    
+    .icon-box {
+        width: 60px; height: 60px; border-radius: 16px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 28px; margin-bottom: 20px;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ANIMACIONES */
+    .floating { animation: float 4s ease-in-out infinite; }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .ping-dot {
+        width: 10px; height: 10px; background: #22c55e;
+        border-radius: 50%; box-shadow: 0 0 10px #22c55e;
+        display: inline-block;
+    }
+
+    /* LISTA WORKFLOW */
+    .list-group-item {
+        background-color: transparent !important;
+        border: 1px solid rgba(255,255,255,0.05) !important;
+        color: white !important;
+        margin-bottom: 10px; border-radius: 12px !important;
+    }
+    .list-group-item.active {
+        background-color: rgba(99, 102, 241, 0.2) !important;
+        border-color: #6366f1 !important;
+    }
+
+    /* AREA CHRISTIAN */
+    .dev-area {
+        background: rgba(0,0,0,0.3);
+        border: 2px dashed rgba(255,255,255,0.2);
+        border-radius: 20px; padding: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb-wrapper">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+        <span class="material-symbols-rounded text-primary me-2">bolt</span>
+        ENVIOS<span class="text-gradient">EXPRESS</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#" data-scroll="#hero">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-scroll="#services">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-scroll="#workflow">Ruta</a></li>
+          <li class="nav-item ms-lg-3">
+            <a class="btn btn-primary-gradient" href="#" data-scroll="#calculator">Calcular Envío</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header id="hero" class="section-padding" style="min-height: 100vh; display: flex; align-items: center; padding-top: 100px;">
+    <div class="container position-relative z-2">
+      <div class="row align-items-center gy-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="badge border border-primary text-white mb-4 px-3 py-2 rounded-pill">⚡ La evolución de la paquetería</div>
+          <h1 class="display-3 fw-bold text-white mb-4">
+            Tus envíos a la velocidad de la <span class="text-gradient">Luz.</span>
+          </h1>
+          <p class="lead text-light-gray mb-5">
+            Olvídate de la logística antigua. Gestionamos tus paquetes con tecnología predictiva y trazabilidad absoluta en tiempo real.
+          </p>
+          <div class="d-flex gap-3">
+            <button class="btn btn-primary-gradient btn-lg shadow-lg" data-scroll="#calculator">Empezar</button>
+            <button class="btn btn-outline-glow btn-lg" data-scroll="#workflow">Ver Demo</button>
+          </div>
+        </div>
+
+        <div class="col-lg-5 offset-lg-1" data-aos="fade-left">
+          <div class="card p-4 floating shadow-lg">
+            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary pb-3" style="border-color: rgba(255,255,255,0.1)!important;">
+              <span class="text-uppercase text-light-gray small fw-bold">ESTADO DEL SISTEMA</span>
+              <div class="d-flex align-items-center gap-2">
+                <span class="ping-dot"></span>
+                <span class="text-white small fw-bold" id="live-indicator">LIVE</span>
+              </div>
+            </div>
+            
+            <div class="text-center py-4">
+              <span class="material-symbols-rounded text-white display-1 mb-3" id="status-icon">wifi_tethering</span>
+              <h3 class="text-white fw-bold mb-1" id="status-text">Sistemas Online</h3>
+              <p class="text-light-gray small">Conexión establecida con flota global</p>
+            </div>
+
+            <button id="toggle-status" class="btn btn-dark w-100 mt-2 text-white fw-bold py-2" style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);">
+              <span class="material-symbols-rounded fs-6 me-2 align-middle">bug_report</span>
+              Simular Incidencia
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="services" class="section-padding">
+    <div class="container">
+      <div class="row mb-5 justify-content-center text-center" data-aos="fade-up">
+        <div class="col-lg-8">
+          <h2 class="fw-bold text-white display-5">Arquitectura de Envíos</h2>
+          <p class="text-light-gray fs-5">Selecciona el módulo que mejor se adapte a tus necesidades.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card service-card h-100 p-4" data-service="urgente">
+            <div class="icon-box shadow">
+              <span class="material-symbols-rounded text-warning">rocket_launch</span>
+            </div>
+            <h4 class="text-white fw-bold">Protocolo Urgente</h4>
+            <p class="text-light-gray">Entrega prioritaria en 24h. Ruta directa sin escalas.</p>
+            <div class="mt-3 text-primary fw-bold small">VER DETALLES &rarr;</div>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card service-card h-100 p-4" data-service="estandar">
+            <div class="icon-box shadow">
+              <span class="material-symbols-rounded text-info">inventory_2</span>
+            </div>
+            <h4 class="text-white fw-bold">Protocolo Estándar</h4>
+            <p class="text-light-gray">Optimización de costes. Entrega garantizada en 48h.</p>
+            <div class="mt-3 text-primary fw-bold small">VER DETALLES &rarr;</div>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card service-card h-100 p-4" data-service="tracking">
+            <div class="icon-box shadow">
+              <span class="material-symbols-rounded text-success">radar</span>
+            </div>
+            <h4 class="text-white fw-bold">Geo-Tracking</h4>
+            <p class="text-light-gray">Posicionamiento GPS en tiempo real de tu mercancía.</p>
+            <div class="mt-3 text-primary fw-bold small">VER DETALLES &rarr;</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mt-5" data-aos="fade-up">
+        <div class="col-12">
+          <div class="card border-0 p-4 text-center shadow">
+            <h5 class="text-gradient fw-bold mb-2 fs-4" id="service-info-title">Selecciona un servicio</h5>
+            <p class="text-white mb-0 fs-5" id="service-info-text">Haz clic en las tarjetas superiores para desplegar las especificaciones.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculator" class="section-padding">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card border-0 shadow-lg" data-aos="zoom-in">
+            <div class="card-body p-5">
+              <div class="text-center mb-5">
+                <span class="badge bg-primary mb-3 text-white">Zona de Usuario</span>
+                <h2 class="text-white fw-bold">Calculadora de Tarifas</h2>
+                <p class="text-light-gray fs-5">Introduce los datos para obtener una cotización instantánea.</p>
+              </div>
+
+              <div class="dev-area text-center">
+                <span class="material-symbols-rounded fs-1 text-light-gray mb-3">terminal</span>
+                <h5 class="text-white fw-bold">Espacio reservado para el Formulario JS</h5>
+                <p class="text-light-gray mb-0">Aquí se renderizarán los inputs de peso, destino y DNI.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow" class="section-padding">
+    <div class="container">
+      <h2 class="text-white fw-bold text-center mb-5 display-5" data-aos="fade-down">Flujo de Operaciones</h2>
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="list-group custom-list" id="workflow-list">
+            <a href="#" class="list-group-item list-group-item-action active" data-step="1">
+              <div class="d-flex w-100 justify-content-between align-items-center">
+                <h5 class="mb-1 fw-bold text-white">01. Digitalización</h5>
+                <span class="material-symbols-rounded text-gradient">qr_code</span>
+              </div>
+              <p class="mb-1 text-light-gray">Generación de etiqueta inteligente.</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-step="2">
+              <div class="d-flex w-100 justify-content-between align-items-center">
+                <h5 class="mb-1 fw-bold text-white">02. Hub Logístico</h5>
+                <span class="material-symbols-rounded text-white">hub</span>
+              </div>
+              <p class="mb-1 text-light-gray">Clasificación automatizada por IA.</p>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" data-step="3">
+              <div class="d-flex w-100 justify-content-between align-items-center">
+                <h5 class="mb-1 fw-bold text-white">03. Entrega Final</h5>
+                <span class="material-symbols-rounded text-white">check_circle</span>
+              </div>
+              <p class="mb-1 text-light-gray">Confirmación biométrica en destino.</p>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="card h-100 d-flex align-items-center justify-content-center p-5 text-center shadow-lg">
+            <div id="step-content">
+              <div class="icon-box mx-auto mb-4" style="background: rgba(99,102,241,0.2);">
+                <span class="material-symbols-rounded fs-2 text-white" id="step-icon">qr_code</span>
+              </div>
+              <h3 class="text-white fw-bold mb-3" id="step-title">Digitalización</h3>
+              <p class="text-light-gray fs-5" id="step-desc">
+                El usuario introduce los datos y nuestro sistema genera un identificador único (Hash) que acompañará al paquete.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-5 bg-black border-top border-secondary mt-5">
+    <div class="container text-center">
+      <h4 class="text-white fw-bold mb-4">ENVIOS<span class="text-gradient">EXPRESS</span></h4>
+      <p class="text-light-gray small mb-0">Proyecto Frontend 2025 · Grupo de Desarrollo Web</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <script>
+    // INICIALIZAR ANIMACIONES
+    document.addEventListener('DOMContentLoaded', () => {
+        AOS.init({ duration: 800, once: true });
+    });
+
+    // SMOOTH SCROLL
+    document.querySelectorAll('a[data-scroll]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('data-scroll'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // LÓGICA DE ESTADO (Hero)
+    const statusBtn = document.getElementById('toggle-status');
+    const statusText = document.getElementById('status-text');
+    const statusIcon = document.getElementById('status-icon');
+    const liveIndicator = document.getElementById('live-indicator');
+    const pingDot = document.querySelector('.ping-dot');
+
+    if(statusBtn) {
+        statusBtn.addEventListener('click', () => {
+            const isOnline = statusText.textContent.includes('Online');
+            if(isOnline) {
+                statusText.textContent = "Error de Conexión";
+                statusText.classList.replace('text-white', 'text-danger');
+                statusIcon.textContent = "wifi_off";
+                statusIcon.classList.replace('text-white', 'text-danger');
+                liveIndicator.textContent = "OFFLINE";
+                liveIndicator.classList.replace('text-white', 'text-danger');
+                pingDot.style.background = '#ef4444';
+                pingDot.style.boxShadow = '0 0 10px #ef4444';
+                statusBtn.innerHTML = '<span class="material-symbols-rounded fs-6 me-2 align-middle">refresh</span>Reconectar';
+            } else {
+                statusText.textContent = "Sistemas Online";
+                statusText.classList.replace('text-danger', 'text-white');
+                statusIcon.textContent = "wifi_tethering";
+                statusIcon.classList.replace('text-danger', 'text-white');
+                liveIndicator.textContent = "LIVE";
+                liveIndicator.classList.replace('text-danger', 'text-white');
+                pingDot.style.background = '#22c55e';
+                pingDot.style.boxShadow = '0 0 10px #22c55e';
+                statusBtn.innerHTML = '<span class="material-symbols-rounded fs-6 me-2 align-middle">bug_report</span>Simular Incidencia';
+            }
+        });
+    }
+
+    // CAMBIO DE SERVICIOS
+    const serviceCards = document.querySelectorAll('.service-card');
+    const infoTitle = document.getElementById('service-info-title');
+    const infoText = document.getElementById('service-info-text');
+
+    const servicesData = {
+        urgente: { title: "Protocolo Urgente (Rocket)", desc: "Utilizamos drones y transporte dedicado para entregas en menos de 24h." },
+        estandar: { title: "Protocolo Estándar (Box)", desc: "Rutas consolidadas por Inteligencia Artificial. Entrega en 48-72h." },
+        tracking: { title: "Geo-Tracking Avanzado", desc: "Acceso a la API de satélite para ver tu paquete moverse en el mapa." }
+    };
+
+    serviceCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            serviceCards.forEach(c => c.style.borderColor = 'rgba(255,255,255,0.1)');
+            card.style.borderColor = '#6366f1';
+            const type = card.getAttribute('data-service');
+            if(servicesData[type]) {
+                infoTitle.textContent = servicesData[type].title;
+                infoText.textContent = servicesData[type].desc;
+            }
+        });
+    });
+
+    // WORKFLOW
+    const workflowItems = document.querySelectorAll('#workflow-list .list-group-item');
+    const stepTitle = document.getElementById('step-title');
+    const stepDesc = document.getElementById('step-desc');
+    const stepIcon = document.getElementById('step-icon');
+
+    const workflowData = {
+        1: { title: "Digitalización", desc: "El usuario introduce los datos y nuestro sistema genera un hash único.", icon: "qr_code" },
+        2: { title: "Hub Logístico", desc: "En el almacén, brazos robóticos clasifican tu paquete.", icon: "hub" },
+        3: { title: "Entrega Final", desc: "El cliente final valida la recepción mediante biometría.", icon: "check_circle" }
+    };
+
+    workflowItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            workflowItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            const step = item.getAttribute('data-step');
+            if(workflowData[step]) {
+                stepTitle.textContent = workflowData[step].title;
+                stepDesc.textContent = workflowData[step].desc;
+                stepIcon.textContent = workflowData[step].icon;
+            }
+        });
+    });
+  </script>
+</body>
+</html>
